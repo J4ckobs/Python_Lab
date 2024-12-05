@@ -1,21 +1,22 @@
 import json
+from dataclasses import dataclass, asdict
 
 
+@dataclass
 class Persona:
-    def __init__(self, name, last_name, address, post_code, pesel):
-        self.name = name
-        self.last_name = last_name
-        self.address = address
-        self.post_code = post_code
-        self.pesel = pesel
+        name: str
+        last_name: str
+        address: str
+        post_code: str
+        pesel: str
 
-class Persons:
-    def __init__(self, persons: [Persona] = []):
-        self.persons = persons
+class People:
+    def __init__(self, people: [Persona] = []):
+        self.people = people
 
     def save(self, filename):
         list = []
-        for p in self.persons:
+        for p in self.people:
             list.append({
                     'name': p.name,
                     'last_name': p.last_name,
@@ -39,15 +40,15 @@ class Persons:
             return matrix
 
 
-person1 = Persona("Jack", "Kowalski", "Lipinki", "00-000","12354364607")
-person2 = Persona("Molly", "Tomaszek", "Florianska", "11-345","09876543212")
-person3 = Persona("Tom", "Tomaszek", "Florianska", "11-345","09876543212")
+person1 = Persona("Jack", "Kowalski", "Lipinki", "00-000", "12354364607")
+person2 = Persona("Molly", "Tomaszek", "Florianska", "11-345", "09876543212")
+person3 = Persona("Tom", "Tomaszek", "Florianska", "11-345", "09876543212")
 
-p = Persons([person1, person2,person3])
+p = People([person1, person2, person3])
 
-p.save("persons.json")
+p.save("people.json")
 
-person_json = Persons.read("persons.json")
+people_json = People.read("people.json")
 
-for p in person_json:
-    print(p.persons)
+for p in people_json:
+    print(p.people)
